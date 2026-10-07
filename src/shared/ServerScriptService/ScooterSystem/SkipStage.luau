@@ -145,14 +145,31 @@ local function creditsOf(player)
 	return credits[player] or 0, credits[player] ~= nil
 end
 
--- true only once it is safely stored
-local function saveCredits(player, n)
-	local api = data()
-	if not api then return false end
-	if not api.SaveNow:Invoke(player, CREDITS_KEY, n) then return false end
-	credits[player] = n
-	if player.Parent then player:SetAttribute(ATTR_CREDITS, n) end
-	return true
+local locks = {}   -- [player] = true while their count is being changed
+
+-- The count changed by `by` and saved at once: true only once it is stored. One change at a
+-- time per player (as DeathManager's revives and TrollEffects' trolls do it), each worked out
+-- from the count as it is when its turn comes, so two at once can never overwrite each other.
+local function changeCredits(player, by)
+	while locks[player] do task.wait() end
+	locks[player] = true
+	local ok, stored = pcall(function()
+		local api = data()
+		if not api or player.Parent ~= Players then return false end
+		local have, known = creditsOf(player)
+		if not known then return false end   -- (their save didn't load: never written over)
+		local n = have + by
+		if n < 0 then return false end
+		if not api.SaveNow:Invoke(player, CREDITS_KEY, n) then return false end
+		if player.Parent == Players then
+			credits[player] = n
+			player:SetAttribute(ATTR_CREDITS, n)
+		end
+		return true
+	end)
+	locks[player] = nil
+	if not ok then warn("[SkipStage] saved skips: " .. tostring(stored)) end
+	return ok and stored == true
 end
 
 ---------------------------------------------------------------- where a skip goes
@@ -268,9 +285,6 @@ local function apply(ride, target)
 		return false
 	end
 
-	-- the run is over first, before anything moves: never timed again (RunTimer)
-	local hadRun = RunTimer.Invalidate(ride, "skipped a stage")
-	if target.Finish then st.toFinish = true else st.skippedTo = target.Order end
 	-- no hazard shoves it from here until it's handed back (see the header)
 	ride.SkipMoving = true
 
@@ -290,6 +304,11 @@ local function apply(ride, target)
 		ride.SkipMoving = nil
 		return false
 	end
+	-- the skip is going ahead: the run is over first, before anything moves (never timed again,
+	-- RunTimer), and the ride remembers where it skipped to. Only now, so a skip called off
+	-- above leaves the run and the ride's next skip exactly as they were.
+	local hadRun = RunTimer.Invalidate(ride, "skipped a stage")
+	if target.Finish then st.toFinish = true else st.skippedTo = target.Order end
 	if ride.Controller then pcall(function() ride.Controller:Stop() end) end
 	pcall(function() chassis:SetNetworkOwner(nil) end)   -- the server holds it for the move
 	holdStill(chassis)
@@ -333,9 +352,7 @@ end
 -- Saved skips from elsewhere (the Daily Rewards calendar): the same count the button spends
 -- and shows. True once saved.
 function SkipStage.GiveSkips(player, n)
-	local have, known = creditsOf(player)
-	if not known then return false end   -- (their save didn't load: never written over)
-	return saveCredits(player, have + n)
+	return changeCredits(player, n)   -- (their save didn't load: never written over)
 end
 
 function SkipStage.IsProduct(productId)
@@ -367,8 +384,7 @@ function SkipStage.ProcessReceipt(receipt)
 		end
 	end
 	if not used then
-		local have, known = creditsOf(player)
-		if not known or not saveCredits(player, have + 1) then
+		if not changeCredits(player, 1) then
 			return Enum.ProductPurchaseDecision.NotProcessedYet   -- nothing given yet: Roblox offers it again
 		end
 		Remotes.Notice:FireClient(player, SAVED_NOTE)
@@ -396,17 +412,19 @@ local function request(player)
 	if not target then return false, why end
 
 	-- a free skip saved on their account: spent now, no prompt
-	local n = creditsOf(player)
-	if n > 0 then
+	if creditsOf(player) > 0 then
 		st.moving = true
-		if not saveCredits(player, n - 1) then
+		if not changeCredits(player, -1) then
 			st.moving = false
 			return false, "Couldn't use your free skip, try again."
 		end
 		target = targetOf(ride)
 		if target and apply(ride, target) then return true, "free" end
 		st.moving = false
-		saveCredits(player, n)   -- not used after all: it's theirs again
+		-- not used after all: it's theirs again
+		if not changeCredits(player, 1) then
+			warn("[SkipStage] couldn't give " .. player.Name .. " back their free skip")
+		end
 		return false, "Couldn't skip right now."
 	end
 

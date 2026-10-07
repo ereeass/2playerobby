@@ -214,6 +214,54 @@ local function markDone(buyerId, crateId, purchaseId)
 	notes[buyerId .. ":" .. crateId] = note
 	if giftStore then pcall(giftStore.SetAsync, giftStore, noteKey(buyerId, crateId), note) end
 end
+-- A crate gift paid for but not delivered yet keeps its note: a new gift of the same crate by the
+-- same buyer would write over it and the paid one would go to the NEW receiver. So the purchase
+-- window closing with a purchase marks the note paid (Token: only the note written for that
+-- prompt, never one delivered or replaced since), and a new gift of that crate waits until it is
+-- delivered (giftRequest, "pending"). An older paid mark than PAID_HOLD no longer blocks, so a note
+-- whose "done" was never written can't stop that crate being gifted for ever.
+local PAID_HOLD = 24 * 3600
+local function awaitingDelivery(note)
+	return type(note) == "table" and type(note.to) == "number" and note.paid == true and note.done == nil
+		and os.time() - (tonumber(note.paidAt) or 0) < PAID_HOLD
+end
+local function markPaid(buyerId, crateId)
+	local note = notes[buyerId .. ":" .. crateId]
+	if not (type(note) == "table" and type(note.to) == "number" and note.token and note.done == nil) then return end
+	local token, at = note.token, os.time()
+	note.paid, note.paidAt = true, at
+	if not giftStore then return end
+	local ok, err = pcall(giftStore.UpdateAsync, giftStore, noteKey(buyerId, crateId), function(old)
+		if type(old) ~= "table" or old.token ~= token or old.done ~= nil then return nil end   -- not that note any more
+		old.paid, old.paidAt = true, at
+		return old
+	end)
+	if not ok and not (STUDIO and noAccess(err)) then warn("[Crates] couldn't mark a crate gift as paid: " .. tostring(err)) end
+end
+-- Is this buyer's last gift of this crate paid for and still waiting to be delivered? Read from
+-- the store (another server may have delivered it since this one's copy was made); this server's
+-- copy also counts while the store still holds that same undelivered note (its paid mark may not
+-- have been written). (answer, read ok) - not ok: the store couldn't be read.
+local function stillPaidFor(buyerId, crateId)
+	local mine = notes[buyerId .. ":" .. crateId]
+	if not giftStore then return awaitingDelivery(mine), true end
+	local ok, stored = pcall(giftStore.GetAsync, giftStore, noteKey(buyerId, crateId))
+	if not ok then
+		if STUDIO and noAccess(stored) then return awaitingDelivery(mine), true end
+		warn("[Crates] couldn't read a crate gift note: " .. tostring(stored))
+		return false, false
+	end
+	stored = type(stored) == "table" and stored or nil
+	if awaitingDelivery(stored) then return true, true end
+	return awaitingDelivery(mine) and stored ~= nil and stored.token == mine.token and stored.done == nil, true
+end
+MarketplaceService.PromptProductPurchaseFinished:Connect(function(who, productId, purchased)
+	if not purchased then return end
+	local crateId, _, isGift = Shared.ForProduct(productId)
+	if not (crateId and isGift) then return end
+	local userId = (typeof(who) == "Instance" and who.UserId) or tonumber(who)
+	if userId then task.spawn(markPaid, userId, crateId) end
+end)
 local function nameOf(userId, fallback)
 	local p = Players:GetPlayerByUserId(userId)
 	if p then return p.DisplayName end
@@ -345,7 +393,7 @@ local function giftTargets(player, crateId)
 	return list
 end
 
--- "prompt" / "gone" / "self" / "busy" / "blocked" / "failed" (as the skin gifts', ScooterSystem.Gifting)
+-- "prompt" / "gone" / "self" / "busy" / "blocked" / "pending" / "failed" (as the skin gifts', ScooterSystem.Gifting)
 local function giftRequest(player, crateId, toUserId)
 	local c = Shared.Get(crateId)
 	if not c or type(toUserId) ~= "number" then return "failed" end
@@ -362,7 +410,12 @@ local function giftRequest(player, crateId, toUserId)
 	while player:GetAttribute(ATTR_BLOCKED) == nil and player.Parent == Players and os.clock() - t0 < POLICY_WAIT do task.wait(0.2) end
 	if not Shared.Allowed(player) then return "blocked" end
 	giftBusy[player] = true
-	local ok = writeNote(player.UserId, crateId, { to = toUserId, toName = target.DisplayName, at = os.time() })
+	-- their last gift of this crate is paid for but not delivered yet: its note stays (see markPaid)
+	local waiting, readOk = stillPaidFor(player.UserId, crateId)
+	if not readOk then giftBusy[player] = nil return "failed" end
+	if waiting then giftBusy[player] = nil return "pending" end
+	local ok = writeNote(player.UserId, crateId, { to = toUserId, toName = target.DisplayName, at = os.time(),
+		token = HttpService:GenerateGUID(false) })
 	giftBusy[player] = nil
 	if not ok or player.Parent ~= Players then return "failed" end
 	local okP, err = pcall(MarketplaceService.PromptProductPurchase, MarketplaceService, player, c.GiftProductId)

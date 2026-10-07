@@ -116,6 +116,52 @@ local function readNote(buyerId, skinId)
 	return nil, false
 end
 
+-- A gift paid for but not delivered yet (its receipt still to come, or being retried) keeps its
+-- note: a new gift of the same skin by the same buyer would write over it, and the paid one
+-- would then go to the NEW receiver. So the purchase window closing with a purchase marks the
+-- note paid (Token: only the note this server wrote for that prompt, never one delivered or
+-- replaced since), and a new gift of that skin waits until it is delivered (request, "pending").
+-- PAID_HOLD: an older paid mark no longer blocks, so a note whose "done" was never written
+-- can't stop that skin being gifted for ever.
+local PAID_HOLD = 24 * 3600
+
+local function awaitingDelivery(note)
+	return type(note) == "table" and type(note.to) == "number" and note.paid == true and note.done == nil
+		and os.time() - (tonumber(note.paidAt) or 0) < PAID_HOLD
+end
+
+local function markPaid(buyerId, skinId)
+	local note = notes[buyerId .. ":" .. skinId]
+	if not (type(note) == "table" and type(note.to) == "number" and note.token and note.done == nil) then return end
+	local token, at = note.token, os.time()
+	note.paid, note.paidAt = true, at
+	if not giftStore then return end
+	local ok, err = pcall(giftStore.UpdateAsync, giftStore, noteKey(buyerId, skinId), function(old)
+		if type(old) ~= "table" or old.token ~= token or old.done ~= nil then return nil end   -- not that note any more
+		old.paid, old.paidAt = true, at
+		return old
+	end)
+	if not ok and not (STUDIO and noAccess(err)) then warn("[Gift] couldn't mark a gift as paid: " .. tostring(err)) end
+end
+
+-- Is this buyer's last gift of this skin paid for and still waiting to be delivered? Read from
+-- the store (another server may have delivered it since this one's copy was made); this
+-- server's copy also counts while the store still holds that same undelivered note (its paid
+-- mark may not have been written). (answer, read ok) - not ok: the store couldn't be read.
+local function stillPaidFor(buyerId, skinId)
+	local mine = notes[buyerId .. ":" .. skinId]
+	if not giftStore then return awaitingDelivery(mine), true end
+	local ok, stored = pcall(giftStore.GetAsync, giftStore, noteKey(buyerId, skinId))
+	if not ok then
+		if STUDIO and noAccess(stored) then return awaitingDelivery(mine), true end
+		warn("[Gift] couldn't read a gift note: " .. tostring(stored))
+		return false, false
+	end
+	stored = type(stored) == "table" and stored or nil
+	if awaitingDelivery(stored) then return true, true end
+	return awaitingDelivery(mine) and stored ~= nil and stored.token == mine.token and stored.done == nil, true
+end
+
 -- delivered: the note now only says which purchase it was, so a receipt Roblox offers
 -- again (on any server) is recognised and never delivered twice
 local function markDone(buyerId, skinId, purchaseId)
@@ -244,6 +290,7 @@ end
 -- "prompt"  the purchase prompt is open      "studio"  a Studio test gift went through
 -- "owned"   they already have it             "gone"    they left
 -- "self"    can't gift yourself              "busy"    too soon / still loading
+-- "pending" their last gift of this skin is paid but not delivered yet (see markPaid)
 -- "failed"  couldn't note it: nothing was charged, try again
 local function request(player, skinId, toUserId)
 	local def = Scooters.Get(skinId)
@@ -260,7 +307,12 @@ local function request(player, skinId, toUserId)
 	if owns then return "owned" end
 
 	busy[player] = true
-	local ok = writeNote(player.UserId, def.Id, { to = toUserId, toName = target.DisplayName, at = os.time() })
+	-- their last gift of this skin is paid for but not delivered yet: its note stays (see markPaid)
+	local waiting, readOk = stillPaidFor(player.UserId, def.Id)
+	if not readOk then busy[player] = nil return "failed" end
+	if waiting then busy[player] = nil return "pending" end
+	local ok = writeNote(player.UserId, def.Id, { to = toUserId, toName = target.DisplayName, at = os.time(),
+		token = HttpService:GenerateGUID(false) })
 	busy[player] = nil
 	if not ok then return "failed" end
 	if player.Parent ~= Players then return "failed" end
@@ -308,6 +360,13 @@ if not GiftRequest:GetAttribute("Bound") then
 	end
 	Players.PlayerRemoving:Connect(function(p)
 		lastRequest[p], lastList[p], busy[p] = nil, nil, nil
+	end)
+	-- a gift's purchase window closed WITH a purchase: its note is marked paid (see markPaid)
+	MarketplaceService.PromptProductPurchaseFinished:Connect(function(who, productId, purchased)
+		local def = purchased and giftProduct[productId]
+		if not def then return end
+		local userId = (typeof(who) == "Instance" and who.UserId) or tonumber(who)
+		if userId then task.spawn(markPaid, userId, def.Id) end
 	end)
 	if STUDIO then
 		-- the gift path without a purchase, from the command bar (Server):

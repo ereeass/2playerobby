@@ -241,23 +241,37 @@ function SpinWheel.IsProduct(productId)
 	return spinsFor(productId) ~= nil
 end
 
--- DonationHandler's ProcessReceipt: the spins go on the balance; granted only once saved
+-- DonationHandler's ProcessReceipt: the spins go on the balance; granted only once saved.
+-- One change to the balance at a time: a spin in progress (or another purchase being saved)
+-- is waited for, then the balance is held (busy: no spin, no earned spin, no other purchase)
+-- from reading it to saving it, so nothing can change it in between and be overwritten.
 local granted = {}   -- [PurchaseId] = true: handled on this server
+local BUSY_WAIT = 20 -- seconds a receipt waits for a spin in progress; then Roblox offers it again
 function SpinWheel.ProcessReceipt(receipt)
 	if granted[receipt.PurchaseId] then return Enum.ProductPurchaseDecision.PurchaseGranted end
 	local player = Players:GetPlayerByUserId(receipt.PlayerId)
 	local st = player and loaded(player)
 	local api = st and dataApi()
 	if not (st and api) then return Enum.ProductPurchaseDecision.NotProcessedYet end
+	local t0 = os.clock()
+	while busy[player] and player.Parent == Players and os.clock() - t0 < BUSY_WAIT do task.wait(0.1) end
+	if granted[receipt.PurchaseId] then return Enum.ProductPurchaseDecision.PurchaseGranted end   -- (handled meanwhile)
+	st = states[player]   -- the balance as it is now, after whatever was in progress
+	if busy[player] or not st or player.Parent ~= Players then return Enum.ProductPurchaseDecision.NotProcessedYet end
+	busy[player] = true
 	local after = { Spins = st.Spins + (spinsFor(receipt.ProductId) or 0), FreeAt = st.FreeAt }
 	local ok, stored = pcall(api.SaveNow.Invoke, api.SaveNow, player, KEY, saved(after))
 	if not (ok and stored) then
 		-- not stored: the save goes back to what it was, so Roblox's retry can't add them twice
 		pcall(api.Set.Invoke, api.Set, player, KEY, saved(st))
+		busy[player] = nil
 		return Enum.ProductPurchaseDecision.NotProcessedYet
 	end
-	states[player] = after
-	show(player)
+	if player.Parent == Players then
+		states[player] = after
+		show(player)
+	end
+	busy[player] = nil
 	granted[receipt.PurchaseId] = true
 	log(player.Name, "bought", spinsFor(receipt.ProductId), "spins")
 	return Enum.ProductPurchaseDecision.PurchaseGranted
@@ -321,9 +335,11 @@ Players.PlayerAdded:Connect(function(player) task.spawn(load, player); task.spaw
 for _, player in ipairs(Players:GetPlayers()) do task.spawn(load, player); task.spawn(checkPolicy, player) end
 Players.PlayerRemoving:Connect(function(player)
 	policy[player], lastBuy[player] = nil, nil
-	-- the clock's progress goes in the save as they leave (it is kept there every few seconds too)
+	-- the clock's progress goes in the save as they leave (it is kept there every few seconds too) -
+	-- unless a spin or a purchase is being saved right now: that save already holds the balance
+	-- (and the clock), and this older copy written over it would undo it (as on shutdown, below)
 	local st, api = states[player], states[player] and dataApi()
-	if st and api then pcall(api.Set.Invoke, api.Set, player, KEY, saved(st)) end
+	if st and api and not busy[player] then pcall(api.Set.Invoke, api.Set, player, KEY, saved(st)) end
 	states[player], busy[player], lastAsk[player] = nil, nil, nil
 end)
 

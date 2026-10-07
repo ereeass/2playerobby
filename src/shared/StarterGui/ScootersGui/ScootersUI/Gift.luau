@@ -701,6 +701,8 @@ function Gift:send(rec)
 				self:layout()
 			elseif status == "busy" then
 				self:setStatus("One moment, then try again!")
+			elseif status == "pending" then
+				self:setStatus("Still delivering your last gift - try again soon!")
 			elseif status == "blocked" then
 				self:setStatus("Crates aren't available in your region.")
 			else

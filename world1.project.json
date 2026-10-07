@@ -1,38 +1,1225 @@
 {
   "name": "world1",
   "servePort": 34872,
-  "globIgnorePaths": [
-    "**/.gitkeep"
-  ],
   "tree": {
     "$className": "DataModel",
+    "ReplicatedFirst": {
+      "$className": "ReplicatedFirst",
+      "$ignoreUnknownInstances": true,
+      "LoadingScreen": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "AssetLoader": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedFirst/LoadingScreen/AssetLoader.luau"
+        },
+        "LoadingClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/ReplicatedFirst/LoadingScreen/LoadingClient.client.luau"
+        }
+      }
+    },
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
-      "Shared": {
-        "$path": "src/shared/ReplicatedStorage"
+      "$ignoreUnknownInstances": true,
+      "CheckpointSelector": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ReplicatedStorage/CheckpointSelector.luau",
+        "Carousel": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/CheckpointSelector/Carousel.luau"
+        },
+        "Motion": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/CheckpointSelector/Motion.luau"
+        },
+        "Sfx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/CheckpointSelector/Sfx.luau"
+        },
+        "View": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/CheckpointSelector/View.luau"
+        }
       },
-      "Place": {
-        "$path": "src/world1/ReplicatedStorage"
+      "CritterSounds": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ReplicatedStorage/CritterSounds.luau"
+      },
+      "DonationSystem": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "Config": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/DonationSystem/Config.luau"
+        }
+      },
+      "HudSync": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ReplicatedStorage/HudSync.luau"
+      },
+      "IntroCinematic": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "Config": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/ReplicatedStorage/IntroCinematic/Config.luau"
+        },
+        "Intro": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/ReplicatedStorage/IntroCinematic/Intro.luau"
+        },
+        "RidePath": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/ReplicatedStorage/IntroCinematic/RidePath.luau"
+        },
+        "RiderPose": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/ReplicatedStorage/IntroCinematic/RiderPose.luau"
+        }
+      },
+      "Music": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "AreaMusic": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/Music/AreaMusic.luau"
+        },
+        "MusicController": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/Music/MusicController.luau"
+        },
+        "Tracks": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/Music/Tracks.luau"
+        }
+      },
+      "ScooterSystem": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "Cinematic": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/ScooterSystem/Cinematic.luau"
+        },
+        "ControlHolds": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/ScooterSystem/ControlHolds.luau"
+        },
+        "Horn": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/ScooterSystem/Horn.luau"
+        },
+        "Shared": {
+          "$className": "Folder",
+          "$ignoreUnknownInstances": true,
+          "Balance": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/Balance.luau"
+          },
+          "BoothEntrance": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/BoothEntrance.luau"
+          },
+          "Checkpoints": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/Checkpoints.luau"
+          },
+          "Config": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/Config.luau"
+          },
+          "Crates": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/Crates.luau"
+          },
+          "DailyRewards": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/DailyRewards.luau"
+          },
+          "RunTime": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/RunTime.luau"
+          },
+          "Scooters": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/Scooters.luau"
+          },
+          "SpinWheel": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/SpinWheel.luau"
+          },
+          "Steering": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ReplicatedStorage/ScooterSystem/Shared/Steering.luau"
+          }
+        }
+      },
+      "SettingsSystem": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "Defaults": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/SettingsSystem/Defaults.luau"
+        },
+        "SettingsController": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/SettingsSystem/SettingsController.luau"
+        }
+      },
+      "TrollFx": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "BlackHoleAllTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/BlackHoleAllTimeline.luau"
+        },
+        "BlackHoleTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/BlackHoleTimeline.luau"
+        },
+        "DragonTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/DragonTimeline.luau"
+        },
+        "Effects": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/Effects.luau"
+        },
+        "ExplodeTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/ExplodeTimeline.luau"
+        },
+        "FreezeTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/FreezeTimeline.luau"
+        },
+        "Kit": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/Kit.luau"
+        },
+        "NukeTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/NukeTimeline.luau"
+        },
+        "RocketTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/RocketTimeline.luau"
+        },
+        "SlapTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/SlapTimeline.luau"
+        },
+        "Timelines": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/Timelines.luau"
+        },
+        "UfoTimeline": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/TrollFx/UfoTimeline.luau"
+        }
+      },
+      "UITemplates": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "CountBadge": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/UITemplates/CountBadge.luau"
+        },
+        "Menus": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ReplicatedStorage/UITemplates/Menus.luau"
+        }
+      },
+      "WorldConfig": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/world1/ReplicatedStorage/WorldConfig.luau"
       }
     },
     "ServerScriptService": {
       "$className": "ServerScriptService",
-      "Shared": {
-        "$path": "src/shared/ServerScriptService"
+      "$ignoreUnknownInstances": true,
+      "Badges": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/Badges.server.luau"
       },
-      "Place": {
-        "$path": "src/world1/ServerScriptService"
+      "BoothTutorial": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/BoothTutorial.server.luau"
+      },
+      "BugReports": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/BugReports.server.luau"
+      },
+      "ControlsPopupServer": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/ControlsPopupServer.server.luau"
+      },
+      "CourseProgress": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/CourseProgress.server.luau",
+        "CoursePath": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/ServerScriptService/CourseProgress/CoursePath.luau"
+        }
+      },
+      "DonationSystem": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "DataManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/DonationSystem/DataManager.luau"
+        },
+        "DonationHandler": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/DonationSystem/DonationHandler.server.luau"
+        },
+        "DonationWebhook": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/DonationSystem/DonationWebhook.luau"
+        },
+        "LeaderboardManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/DonationSystem/LeaderboardManager.luau"
+        }
+      },
+      "FastestDuosLeaderboard": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/FastestDuosLeaderboard.server.luau"
+      },
+      "FastestDuosPodiums": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/FastestDuosPodiums.server.luau"
+      },
+      "FavoritePrompt": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/FavoritePrompt.server.luau"
+      },
+      "GateSign": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/GateSign.server.luau"
+      },
+      "IntroCinematicServer": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/world1/ServerScriptService/IntroCinematicServer.server.luau"
+      },
+      "KillGates": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/KillGates.server.luau"
+      },
+      "KillZones": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/KillZones.server.luau"
+      },
+      "KnockableCones": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/KnockableCones.server.luau"
+      },
+      "Landmines": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/world1/ServerScriptService/Landmines.server.luau"
+      },
+      "PlaytimeLeaderboard": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/world1/ServerScriptService/PlaytimeLeaderboard.server.luau"
+      },
+      "Road3Cuts": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/world1/ServerScriptService/Road3Cuts.luau"
+      },
+      "Road3CutsRunner": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/world1/ServerScriptService/Road3CutsRunner.server.luau"
+      },
+      "RoadNodes": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/RoadNodes.server.luau"
+      },
+      "ScooterBlockers": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/ScooterBlockers.server.luau"
+      },
+      "ScooterSystem": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "AntiCheat": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/AntiCheat.luau"
+        },
+        "AntiCheatWebhook": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/AntiCheatWebhook.luau"
+        },
+        "BlackHoleAll": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/BlackHoleAll.luau"
+        },
+        "CapsuleEntry": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/CapsuleEntry.luau"
+        },
+        "CapsuleGeometry": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/CapsuleGeometry.luau"
+        },
+        "CapsuleManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/CapsuleManager.luau"
+        },
+        "CheckpointProgress": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/CheckpointProgress.luau"
+        },
+        "CollisionGroups": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/CollisionGroups.luau"
+        },
+        "Crates": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/Crates.luau"
+        },
+        "DailyRewards": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/DailyRewards.luau"
+        },
+        "DeathManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/DeathManager.luau"
+        },
+        "DuoState": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/DuoState.luau"
+        },
+        "Funnels": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/Funnels.luau"
+        },
+        "GiftedSkins": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/GiftedSkins.server.luau"
+        },
+        "Gifting": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/Gifting.luau"
+        },
+        "JoinAlerts": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/JoinAlerts.server.luau"
+        },
+        "LavaDragon": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/LavaDragon.luau"
+        },
+        "Main": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/Main.server.luau"
+        },
+        "NukeAll": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/NukeAll.luau"
+        },
+        "OversizedAccessories": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/OversizedAccessories.luau"
+        },
+        "ReviveSpot": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/ReviveSpot.luau"
+        },
+        "ReviveWebhook": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/ReviveWebhook.luau"
+        },
+        "RideManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/RideManager.luau"
+        },
+        "RiderAttach": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/RiderAttach.luau"
+        },
+        "RiderPose": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/RiderPose.luau"
+        },
+        "RunTimer": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/RunTimer.luau"
+        },
+        "ScooterController": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/ScooterController.luau"
+        },
+        "ScooterPodiums": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/ScooterPodiums.server.luau"
+        },
+        "ScooterSelection": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/ScooterSelection.luau"
+        },
+        "ScooterWebhook": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/ScooterWebhook.luau"
+        },
+        "SkipStage": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/SkipStage.luau"
+        },
+        "SkipStageWebhook": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/SkipStageWebhook.luau"
+        },
+        "Spectate": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/Spectate.server.luau"
+        },
+        "SpinInPlace": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/SpinInPlace.luau"
+        },
+        "SpinWheel": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/SpinWheel.luau"
+        },
+        "StartManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/StartManager.luau"
+        },
+        "TeamManager": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/TeamManager.luau"
+        },
+        "TrollEffects": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects.luau",
+          "BlackHole": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects/BlackHole.luau"
+          },
+          "Explode": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects/Explode.luau"
+          },
+          "Freeze": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects/Freeze.luau"
+          },
+          "Rocket": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects/Rocket.luau"
+          },
+          "Slap": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects/Slap.luau"
+          },
+          "Ufo": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/ServerScriptService/ScooterSystem/TrollEffects/Ufo.luau"
+          }
+        },
+        "TrollShow": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/TrollShow.luau"
+        },
+        "TrollWebhook": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/ServerScriptService/ScooterSystem/TrollWebhook.luau"
+        }
+      },
+      "SettingsServer": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/SettingsServer.server.luau"
+      },
+      "WaterHazard": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/WaterHazard.server.luau"
+      },
+      "WorldUnlock": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/ServerScriptService/WorldUnlock.server.luau"
+      }
+    },
+    "StarterGui": {
+      "$className": "StarterGui",
+      "$ignoreUnknownInstances": true,
+      "BlackHoleAllGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "BlackHoleAllCinematic": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/BlackHoleAllGui/BlackHoleAllCinematic.client.luau"
+        }
+      },
+      "CheckpointImagePreload": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "Preload": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/CheckpointImagePreload/Preload.client.luau"
+        }
+      },
+      "CourseProgressGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "CourseProgressUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/CourseProgressGui/CourseProgressUI.client.luau"
+        }
+      },
+      "DailyGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "DailyUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/DailyGui/DailyUI.client.luau",
+          "Menu": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/DailyGui/DailyUI/Menu.luau"
+          }
+        }
+      },
+      "DeathGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "DeathClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/DeathGui/DeathClient.client.luau"
+        }
+      },
+      "DragonGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "DragonCinematic": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/DragonGui/DragonCinematic.client.luau"
+        }
+      },
+      "InviteGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "Container": {
+          "$className": "Frame",
+          "$ignoreUnknownInstances": true,
+          "InviteButton": {
+            "$className": "TextButton",
+            "$ignoreUnknownInstances": true,
+            "InviteClient": {
+              "$ignoreUnknownInstances": true,
+              "$path": "src/shared/StarterGui/InviteGui/Container/InviteButton/InviteClient.client.luau"
+            }
+          }
+        }
+      },
+      "NukeGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "NukeCinematic": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/NukeGui/NukeCinematic.client.luau"
+        }
+      },
+      "RespawnGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "RespawnUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/RespawnGui/RespawnUI.client.luau"
+        }
+      },
+      "RideGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "Controller": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/RideGui/Controller.client.luau"
+        }
+      },
+      "RunTimerGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "RunTimerClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/RunTimerGui/RunTimerClient.client.luau"
+        }
+      },
+      "ScootersGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "ScootersUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/ScootersGui/ScootersUI.client.luau",
+          "Cards": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/ScootersGui/ScootersUI/Cards.luau"
+          },
+          "Gift": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/ScootersGui/ScootersUI/Gift.luau"
+          },
+          "Menu": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/ScootersGui/ScootersUI/Menu.luau"
+          },
+          "Preview": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/ScootersGui/ScootersUI/Preview.luau"
+          }
+        }
+      },
+      "SettingsGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "SettingsUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterGui/SettingsGui/SettingsUI.client.luau"
+        }
+      },
+      "ShopGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "ShopUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/ShopGui/ShopUI.client.luau",
+          "Menu": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/world1/StarterGui/ShopGui/ShopUI/Menu.luau"
+          }
+        }
+      },
+      "SkipStageGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "SkipStageUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/SkipStageGui/SkipStageUI.client.luau"
+        }
+      },
+      "SpinWheelWindow": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "SpinWheelUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterGui/SpinWheelWindow/SpinWheelUI.client.luau"
+        }
+      },
+      "StopwatchGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "StopwatchUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/StopwatchGui/StopwatchUI.client.luau"
+        }
+      },
+      "TrollGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "TrollUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/TrollGui/TrollUI.client.luau",
+          "Actions": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/TrollGui/TrollUI/Actions.luau"
+          },
+          "Menu": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/TrollGui/TrollUI/Menu.luau"
+          },
+          "Spectate": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterGui/TrollGui/TrollUI/Spectate.luau"
+          }
+        }
+      },
+      "TrolledGui": {
+        "$className": "ScreenGui",
+        "$ignoreUnknownInstances": true,
+        "TrolledUI": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterGui/TrolledGui/TrolledUI.client.luau"
+        }
       }
     },
     "StarterPlayer": {
       "$className": "StarterPlayer",
+      "$ignoreUnknownInstances": true,
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",
-        "Shared": {
-          "$path": "src/shared/StarterPlayerScripts"
+        "$ignoreUnknownInstances": true,
+        "AnimatorRestartFix": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/AnimatorRestartFix.client.luau"
         },
-        "Place": {
-          "$path": "src/world1/StarterPlayerScripts"
+        "AntiAfk": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/AntiAfk.client.luau"
+        },
+        "AreaMusic": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/AreaMusic.client.luau"
+        },
+        "AtlasHeadFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/AtlasHeadFx.client.luau"
+        },
+        "BlackHoleShopFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/BlackHoleShopFx.client.luau"
+        },
+        "BoardwalkScareFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/BoardwalkScareFx.client.luau"
+        },
+        "BoothGuide": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/BoothGuide.client.luau"
+        },
+        "BoothTutorial": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/BoothTutorial.client.luau"
+        },
+        "BridgeSnakes": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/BridgeSnakes.client.luau"
+        },
+        "CampfireFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/CampfireFx.client.luau"
+        },
+        "CandySpinFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/CandySpinFx.client.luau"
+        },
+        "CapsuleFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/CapsuleFx.client.luau"
+        },
+        "CheckpointUnlockPopup": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/CheckpointUnlockPopup.client.luau"
+        },
+        "ConeKnock": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ConeKnock.client.luau"
+        },
+        "CrabIslandFish": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/CrabIslandFish.client.luau"
+        },
+        "CrateOpenFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/CrateOpenFx.client.luau"
+        },
+        "DartFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/DartFx.client.luau"
+        },
+        "DonationBoardClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/DonationBoardClient.client.luau",
+          "BoardUI": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/DonationBoardClient/BoardUI.luau"
+          },
+          "Celebration": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/DonationBoardClient/Celebration.luau"
+          },
+          "HoverLift": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/DonationBoardClient/HoverLift.luau"
+          }
+        },
+        "DragonReactorFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/DragonReactorFx.client.luau"
+        },
+        "DragonWake": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/DragonWake.client.luau"
+        },
+        "DrawbridgeFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/DrawbridgeFx.client.luau"
+        },
+        "FavoritePromptClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FavoritePromptClient.client.luau"
+        },
+        "FinishCutscene": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene.client.luau",
+          "CameraRig": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/CameraRig.luau"
+          },
+          "Celebration": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Celebration.luau"
+          },
+          "Confetti": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Confetti.luau"
+          },
+          "Config": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Config.luau"
+          },
+          "Fade": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Fade.luau"
+          },
+          "FinishLine": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/FinishLine.luau"
+          },
+          "Lock": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Lock.luau"
+          },
+          "Path": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Path.luau"
+          },
+          "Scene": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FinishCutscene/Scene.luau"
+          }
+        },
+        "FloatingBoards": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/FloatingBoards.client.luau"
+        },
+        "FoodLotPigeons": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/FoodLotPigeons.client.luau"
+        },
+        "Footsteps": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/Footsteps.client.luau",
+          "Settings": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/Footsteps/Settings.luau"
+          },
+          "Surface": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/Footsteps/Surface.luau"
+          }
+        },
+        "GummyBearFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/GummyBearFx.client.luau"
+        },
+        "HammerWhoosh": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/HammerWhoosh.client.luau"
+        },
+        "IceScooterFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/IceScooterFx.client.luau"
+        },
+        "IceSlide": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/IceSlide.client.luau"
+        },
+        "InkDemonFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/InkDemonFx.client.luau"
+        },
+        "JoinAlerts": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/JoinAlerts.client.luau"
+        },
+        "JoinDeviceReport": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/JoinDeviceReport.client.luau"
+        },
+        "JungleButterflies": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/JungleButterflies.client.luau"
+        },
+        "JungleMonkeys": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/JungleMonkeys.client.luau"
+        },
+        "LandmineFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/LandmineFx.client.luau"
+        },
+        "MesaBugs": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/MesaBugs.client.luau"
+        },
+        "MusicClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/MusicClient.client.luau"
+        },
+        "NukeShopFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/NukeShopFx.client.luau"
+        },
+        "OctopusFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/OctopusFx.client.luau"
+        },
+        "OniScooterFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/OniScooterFx.client.luau"
+        },
+        "ProximityGlow": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ProximityGlow.client.luau"
+        },
+        "RainbowRoadFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/RainbowRoadFx.client.luau"
+        },
+        "ReaperScooterFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ReaperScooterFx.client.luau"
+        },
+        "RideTrollPrompt": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/RideTrollPrompt.client.luau"
+        },
+        "RoadDolphins": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/RoadDolphins.client.luau"
+        },
+        "RottenBridgeFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/RottenBridgeFx.client.luau"
+        },
+        "ScooterBalance": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ScooterBalance.client.luau"
+        },
+        "ScooterFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ScooterFx.client.luau"
+        },
+        "ScooterGhostFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ScooterGhostFx.client.luau"
+        },
+        "ScooterPodiumSpin": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/ScooterPodiumSpin.client.luau"
+        },
+        "ScorpionWalk": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/ScorpionWalk.client.luau"
+        },
+        "Seagulls": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/Seagulls.client.luau"
+        },
+        "SettingsClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/SettingsClient.client.luau"
+        },
+        "SkinFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/SkinFx.client.luau"
+        },
+        "SnowPenguins": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/SnowPenguins.client.luau"
+        },
+        "SweeperFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/SweeperFx.client.luau"
+        },
+        "SwingLogFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/StarterPlayer/StarterPlayerScripts/SwingLogFx.client.luau"
+        },
+        "TeleportFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TeleportFx.client.luau"
+        },
+        "TrollFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx.client.luau",
+          "BlackHole": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx/BlackHole.luau"
+          },
+          "Explode": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx/Explode.luau"
+          },
+          "Freeze": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx/Freeze.luau"
+          },
+          "Rocket": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx/Rocket.luau"
+          },
+          "Slap": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx/Slap.luau"
+          },
+          "Ufo": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/shared/StarterPlayer/StarterPlayerScripts/TrollFx/Ufo.luau"
+          }
+        },
+        "WatcherFx": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/WatcherFx.client.luau"
+        },
+        "WorldPortalsClient": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/StarterPlayer/StarterPlayerScripts/WorldPortalsClient.client.luau"
+        }
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "$ignoreUnknownInstances": true,
+      "Atlas Ice Hazards": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "HazardController": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/Atlas Ice Hazards/HazardController.server.luau"
+        }
+      },
+      "Balloon House": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "HouseDrift": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/Balloon House/HouseDrift.server.luau"
+        }
+      },
+      "BoulderMountain": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "BoulderController": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/BoulderMountain/BoulderController.server.luau"
+        }
+      },
+      "CrashedPlanePillar": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "FlameFlicker": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/CrashedPlanePillar/FlameFlicker.server.luau"
+        }
+      },
+      "Finish Area": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "Portal": {
+          "$className": "Model",
+          "$ignoreUnknownInstances": true,
+          "PortalTeleport": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/world1/Workspace/Finish Area/Portal/PortalTeleport.server.luau"
+          }
+        }
+      },
+      "FlameFlicker": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/shared/Workspace/FlameFlicker.server.luau"
+      },
+      "Jungle Dirt Road": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "Dart Shooters": {
+          "$className": "Model",
+          "$ignoreUnknownInstances": true,
+          "DartShooterServer": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/world1/Workspace/Jungle Dirt Road/Dart Shooters/DartShooterServer.server.luau"
+          }
+        }
+      },
+      "Jungle Log Road": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "Swinging Logs": {
+          "$className": "Model",
+          "$ignoreUnknownInstances": true,
+          "SwingingLogServer": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/world1/Workspace/Jungle Log Road/Swinging Logs/SwingingLogServer.server.luau"
+          }
+        }
+      },
+      "Portal (Lobby)": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "PortalTeleport": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/shared/Workspace/Portal (Lobby)/PortalTeleport.server.luau"
+        }
+      },
+      "Rainbow Road": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "Rainbow Shooters": {
+          "$className": "Model",
+          "$ignoreUnknownInstances": true,
+          "DartShooterServer": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/world1/Workspace/Rainbow Road/Rainbow Shooters/DartShooterServer.server.luau"
+          }
+        }
+      },
+      "Roads": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "Road3 Hammers": {
+          "$className": "Model",
+          "$ignoreUnknownInstances": true,
+          "HammerSwing": {
+            "$ignoreUnknownInstances": true,
+            "$path": "src/world1/Workspace/Roads/Road3 Hammers/HammerSwing.server.luau"
+          }
+        }
+      },
+      "Sandy Lighthouse": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "LighthouseSpin": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/Sandy Lighthouse/LighthouseSpin.server.luau"
+        }
+      },
+      "Shiba Hot Air Balloon": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "BalloonDrift": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/Shiba Hot Air Balloon/BalloonDrift.server.luau"
+        }
+      },
+      "Stone Sweeper": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "StoneSweeperServer": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/Stone Sweeper/StoneSweeperServer.server.luau"
+        }
+      },
+      "TropicalIsland": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "CrabScuttle": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/TropicalIsland/CrabScuttle.server.luau"
+        }
+      },
+      "TumbleweedMesa": {
+        "$className": "Model",
+        "$ignoreUnknownInstances": true,
+        "TumbleweedController": {
+          "$ignoreUnknownInstances": true,
+          "$path": "src/world1/Workspace/TumbleweedMesa/TumbleweedController.server.luau"
         }
       }
     }

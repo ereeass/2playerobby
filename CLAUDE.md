@@ -3,14 +3,18 @@
 This is a Roblox game ("Scooter Duo 2 player obby") with **two places** in one experience, synced to Roblox Studio with Rojo.
 
 ## Layout
-- `src/shared/` – code used by **both** places. Put changes here by default.
-- `src/world1/` – code only for World 1 (Scooter Duo 2 player obby).
-- `src/world2/` – code only for World 2.
-- `world1.project.json` / `world2.project.json` – one Rojo project per place.
+- `src/shared/` – scripts used by **both** places (identical in each). Put changes here by default.
+- `src/world1/` – scripts only in World 1 (Scooter Duo 2 player obby), or that differ from World 2.
+- `src/world2/` – scripts only in World 2, or that differ from World 1.
+- `world1.project.json` / `world2.project.json` – one Rojo project per place. **Generated, don't hand-edit.**
+- `tools/gen_projects.py` – rebuilds both project files. Run `python3 tools/gen_projects.py` after adding, removing or renaming any script, and commit the result.
+- `tools/containers.json` – Roblox class of every folder, GUI or model that holds a script. Add an entry when a script goes into a new container.
 
-In Studio, each service gets a `Shared` folder (from `src/shared/...`) and a `Place` folder (from `src/worldN/...`). Shared code can `require` `ReplicatedStorage.Place.<Module>` to read place-specific settings.
+Folders under `src/<x>/` mirror the exact path in Studio, e.g. `src/shared/ReplicatedStorage/ScooterSystem/Horn.luau` is `ReplicatedStorage.ScooterSystem.Horn`. A path must exist in only one of `shared` or a `worldN` folder. To make a shared script place-specific, move it from `shared` into **both** `world1` and `world2`.
 
 File names: `Name.server.luau` = Script, `Name.client.luau` = LocalScript, `Name.luau` = ModuleScript.
+
+Only scripts are synced. Parts, models, GUIs, RemoteEvents, Sounds etc. stay in Studio (Rojo ignores them), so changes to those must be done by hand in Studio. `ServerStorage` (backups and builder tools) is not in the repo.
 
 ## Rules (always follow)
 1. **Never wipe player save data.** Never change DataStore names, keys or scopes, never call RemoveAsync or overwrite saves with empty or default data, and keep new save formats backwards-compatible with old saves.

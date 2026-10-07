@@ -1,0 +1,40 @@
+{
+  "name": "world1",
+  "servePort": 34872,
+  "globIgnorePaths": [
+    "**/.gitkeep"
+  ],
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Shared": {
+        "$path": "src/shared/ReplicatedStorage"
+      },
+      "Place": {
+        "$path": "src/world1/ReplicatedStorage"
+      }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "Shared": {
+        "$path": "src/shared/ServerScriptService"
+      },
+      "Place": {
+        "$path": "src/world1/ServerScriptService"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "Shared": {
+          "$path": "src/shared/StarterPlayerScripts"
+        },
+        "Place": {
+          "$path": "src/world1/StarterPlayerScripts"
+        }
+      }
+    }
+  }
+}

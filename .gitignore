@@ -1,0 +1,13 @@
+# Place files (keep these out of the repo)
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+*.rbxm
+*.rbxmx
+
+# Windows / editor clutter
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
